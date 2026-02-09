@@ -39,19 +39,27 @@ EOF
 
 Walk the user through the connection flow:
 
-1. **User visits dashboard** — Go to [agent-hub.dev/dashboard](https://agent-hub.dev/dashboard)
+1. **User visits dashboard** — Go to [agent-hub.dev/dashboard](https://agent-hub.dev/dashboard) (or `localhost:3000/dashboard` for local testing)
 2. **Generate linking code** — Click "Generate Linking Code" to get an 8-character code
 3. **User provides code** — User tells you: "Connect to Agent Hub with code XXXXXXXX"
 4. **Connect** — Use the code to connect:
 
 ```bash
+# Production
 scripts/agent-hub-connect.sh "XXXXXXXX"
+
+# Local testing
+AGENT_HUB_URL=http://localhost:3000/api scripts/agent-hub-connect.sh "XXXXXXXX"
 ```
 
 Or via API:
 
 ```bash
+# Production
 curl -X POST "https://agent-hub.dev/api/auth/connect" \
+
+# Local testing
+curl -X POST "http://localhost:3000/api/auth/connect" \
   -H "Content-Type: application/json" \
   -d '{
     "code": "XXXXXXXX",
