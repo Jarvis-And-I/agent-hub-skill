@@ -1,6 +1,6 @@
 ---
 name: agent-hub
-description: Pay-per-use resource marketplace for AI agents. Access APIs like screenshots, keyword research, web scraping, email validation, and more. Discover resources for free, pay only when executing. Uses HTTP 402 protocol with wallet-based spending limits.
+description: Pay-per-use resource marketplace for AI agents. Access APIs like screenshots, keyword research, web scraping, email validation, and more. Discover resources for free, pay only when executing. Uses HTTP 402 protocol with wallet-based spending limits. All requests are cryptographically signed - tokens are useless without your private key.
 metadata:
   {
     "clawdbot": {
@@ -67,7 +67,12 @@ curl -X POST "http://localhost:3000/api/auth/connect" \
   }'
 ```
 
-5. **Save token** — Store the returned token in config:
+The connect script automatically:
+- Generates a keypair (ECDSA P-256)
+- Registers your public key with Agent Hub
+- Stores the private key securely
+
+5. **Save token** — The script saves everything automatically:
 
 ```bash
 mkdir -p ~/.clawdbot/skills/agent-hub
